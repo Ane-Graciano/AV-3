@@ -5,12 +5,11 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client"
+  provider        = "prisma-client"
   previewFeatures = ["prismaSchemaFolder"]
-  // output   = "../generated/prisma"
+  output   = "../generated/prisma"
 }
 
 datasource db {
   provider = "mysql"
-  adapter  = "mysql"
 }
