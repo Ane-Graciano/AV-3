@@ -1,0 +1,151 @@
+### VARIÁVEIS DE AMBIENTE (AJUSTE A PORTA SE NECESSÁRIO)
+@baseUrl = http://localhost:3000/api
+@adminUsuario = teste.admin
+@adminSenha = 123456
+
+
+# =================================================================
+# 1. LOGIN (OBTER TOKEN)
+# CRUCIAL: Salva o JWT na variável @token
+# =================================================================
+
+POST {{baseUrl}}/funcionarios/login
+Content-Type: application/json
+Accept: application/json
+Name: login
+
+{
+  "usuario": "{{adminUsuario}}",
+  "senha": "{{adminSenha}}"
+}
+
+###
+
+# =================================================================
+# 2. CRIAÇÃO DE AERONAVE (POST)
+# Requer: Token. Salva ID da Aeronave em @aeronaveId
+# =================================================================
+
+POST {{baseUrl}}/aeronaves
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibml2ZWwiOiJBRE1JTklTVFJBRE9SIiwiaWF0IjoxNzY0MzUzNzIzLCJleHAiOjE3NjQzNjA5MjN9.Jpj5W3l2xZTaG9vypK28-zmf-WhummguoesqrZ6R324
+Name: criarAeronave
+
+{
+  "codigo": "AV-2025-001",
+  "modelo": "AEROCODE-JATO",
+  "tipo": "COMERCIAL", 
+  "capacidade": 80,
+  "alcance": 3500
+}
+
+###
+
+# =================================================================
+# 3. CRIAÇÃO DE PEÇA (POST)
+# Requer: Token, e utiliza @aeronaveId para vincular a peça.
+# Salva ID da Peça em @pecaId
+# =================================================================
+
+POST {{baseUrl}}/aeronaves/A2/pecas
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibml2ZWwiOiJBRE1JTklTVFJBRE9SIiwiaWF0IjoxNzY0MzUzNzIzLCJleHAiOjE3NjQzNjA5MjN9.Jpj5W3l2xZTaG9vypK28-zmf-WhummguoesqrZ6R324
+Name: criarPeca
+
+{
+  "nome": "Radar de Navegação Primário",
+  "tipo": "IMPORTADA", 
+  "fornecedor": "GlobalNav Systems",
+  "status": "EM_PRODUCAO", 
+  "aeronaveId": "A2"
+}
+
+###
+
+# =================================================================
+# 4. ATUALIZAÇÃO DO STATUS DA PEÇA (PATCH/PUT)
+# Requer: Token, utiliza @pecaId
+# Simula a evolução do status da peça (de 'EM_PRODUCAO' para 'EM_TRANSPORTE')
+# =================================================================
+
+// Supondo uma rota /pecas/{id}/status
+PATCH {{baseUrl}}/pecas/1/status
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibml2ZWwiOiJBRE1JTklTVFJBRE9SIiwiaWF0IjoxNzY0MzUzNzIzLCJleHAiOjE3NjQzNjA5MjN9.Jpj5W3l2xZTaG9vypK28-zmf-WhummguoesqrZ6R324
+
+{
+  "novoStatus": "EM_TRANSPORTE" 
+}
+
+###
+
+# =================================================================
+# 5. BUSCA DE DETALHES DA AERONAVE (GET)
+# Verifica se a peça criada foi corretamente associada à aeronave.
+# =================================================================
+
+GET {{baseUrl}}/aeronaves/A0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibml2ZWwiOiJBRE1JTklTVFJBRE9SIiwiaWF0IjoxNzY0MzUzNzIzLCJleHAiOjE3NjQzNjA5MjN9.Jpj5W3l2xZTaG9vypK28-zmf-WhummguoesqrZ6R324
+Accept: application/json
+
+###
+
+
+
+
+# =================================================================
+# CRIAÇÃO DA ETAPA
+# =================================================================
+
+POST {{baseUrl}}/aeronaves/A2/etapas 
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibml2ZWwiOiJBRE1JTklTVFJBRE9SIiwiaWF0IjoxNzY0MzUzNzIzLCJleHAiOjE3NjQzNjA5MjN9.Jpj5W3l2xZTaG9vypK28-zmf-WhummguoesqrZ6R324
+Name: criarEtapa
+
+{
+  "nome": "Instalação da Fiação e Cabos",
+  "prazo": "2026-06-30T10:00:00Z",
+  "status": "PENDENTE" 
+}
+
+### 
+
+# =================================================================
+# 2. INICIAR ETAPA (PATCH)
+# Requer: Token de OPERADOR (conforme sua rota)
+# Muda o status de PENDENTE para EM_ANDAMENTO.
+# =================================================================
+
+PATCH {{baseUrl}}/etapas/1/iniciar
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibml2ZWwiOiJBRE1JTklTVFJBRE9SIiwiaWF0IjoxNzY0MzUzNzIzLCJleHAiOjE3NjQzNjA5MjN9.Jpj5W3l2xZTaG9vypK28-zmf-WhummguoesqrZ6R324
+
+###
+
+# =================================================================
+# 3. ASSOCIAR FUNCIONÁRIO À ETAPA (PATCH)
+# Requer: Token de OPERADOR (conforme sua rota)
+# Associa um funcionário ({{funcionarioId}}) à etapa.
+# =================================================================
+
+PATCH {{baseUrl}}/etapas/1/associar-funcionario
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibml2ZWwiOiJBRE1JTklTVFJBRE9SIiwiaWF0IjoxNzY0MzUzNzIzLCJleHAiOjE3NjQzNjA5MjN9.Jpj5W3l2xZTaG9vypK28-zmf-WhummguoesqrZ6R324
+
+{
+  "funcionarioId": 1
+}
+
+###
+
+# =================================================================
+# 4. FINALIZAR ETAPA (PATCH)
+# Requer: Token de OPERADOR (conforme sua rota)
+# Muda o status de EM_ANDAMENTO para CONCLUIDA.
+# =================================================================
+
+PATCH {{baseUrl}}/etapas/1/finalizar
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibml2ZWwiOiJBRE1JTklTVFJBRE9SIiwiaWF0IjoxNzY0MzUzNzIzLCJleHAiOjE3NjQzNjA5MjN9.Jpj5W3l2xZTaG9vypK28-zmf-WhummguoesqrZ6R324
+
+###

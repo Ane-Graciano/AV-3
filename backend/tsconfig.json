@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    /* Módulos */
+    "target": "ES2022",
+    "module": "CommonJS", // Crucial para resolver o ERR_MODULE_NOT_FOUND em Node.js
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    
+    /* Configuração de Pastas */
+    // Ajuste o rootDir para incluir a pasta 'backend/src'
+    "rootDir": "./src", 
+    
+    "outDir": "./dist",
+    "resolveJsonModule": true,
+    
+    /* Resolução de Módulos */
+    "moduleResolution": "Node", 
+    
+    /* Regras de Compilação */
+    "strict": true,
+    "skipLibCheck": true,
+    "sourceMap": true
+  },
+  // Inclui todos os arquivos TS dentro da sua pasta de código
+  "include": ["./src/**/*"], 
+  "exclude": ["node_modules"]
+}

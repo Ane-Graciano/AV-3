@@ -1,0 +1,20 @@
+--- RELATÓRIO FINAL DE ENTREGA ---
+
+Data de Geração: 30 de novembro de 2025 às 17:41:51
+
+--- DADOS DA AERONAVE ---
+ID Interno: 11
+Código: A16
+Modelo: testando
+Tipo: COMERCIAL
+Capacidade: 1000
+Alcance: 12
+
+--- PEÇAS UTILIZADAS (1) ---
+- teste (Fornecedor: teste2, Status: PRONTA)
+
+--- ETAPAS REALIZADAS (1) ---
+- teste (Prazo: 1 dia, Status: CONCLUIDA, Responsáveis: maria, felipe)
+
+--- RESULTADOS DOS TESTES (1) ---
+- AERODINAMICO: APROVADO (Técnico: ana)
