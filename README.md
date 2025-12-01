@@ -66,7 +66,7 @@ USE aerocode_av3;
 ### 3. Criar o arquivo `.env`
 
 
-Na raiz do projeto(av-3) (mesmo nível do `package.json`), crie um arquivo chamado `.env` com o seguinte conteúdo:
+Na raiz do backend, crie um arquivo chamado `.env` com o seguinte conteúdo:
 
 ```env
 DATABASE_URL="mysql://root:senha_do_banco@localhost:3306/aerocode_av3"
@@ -86,6 +86,10 @@ DATABASE_URL="mysql://av3user:av3senha@localhost:3306/aerocode_av3"
 JWT_SECRET="av3"
 ```
 
+na raiz do frontend, criar um .env também
+```
+VITE_API_URL=http://localhost:3000/api
+```
 
 ### 4. Rodar o projeto
 
@@ -108,6 +112,10 @@ npx prisma migrate dev --name init
 Gere o primeiro usuario no banco(workbanch) com o codigo
 ```bash
 insert into funcionario(nome ,telefone , endereco, usuario ,senha  ,nivelPermissao) values('ana','11111111','teste','teste.admin','$2b$10$MDL2GVoovZ6Ijvdf2eALu.DeMTegZd7k/BCQ5Mny76x3wQrXqBAGe','ADMINISTRADOR');
+```
+ou
+```bash
+insert into Funcionario(nome ,telefone , endereco, usuario ,senha  ,nivelPermissao) values('ana','11111111','teste','teste.admin','$2b$10$MDL2GVoovZ6Ijvdf2eALu.DeMTegZd7k/BCQ5Mny76x3wQrXqBAGe','ADMINISTRADOR');
 ```
 
 ---
