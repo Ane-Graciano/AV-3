@@ -1,4 +1,3 @@
-// src/controllers/TesteController.ts
 
 import { Response } from 'express';
 import { TesteService } from '../services/teste.service';
@@ -9,18 +8,15 @@ const testeService = new TesteService();
 
 export class TesteController {
 
-    // exige ENGENHEIRO
     async registrarTeste(req: AuthRequest, res: Response) {
         const { codigo: aeronaveCodigo } = req.params;
         const { tipo, resultado, observacao, data, funcionarioId } = req.body;
 
         try {
-            // valida campos obrigatórios
             if (!tipo || !resultado || !data) {
                 return res.status(400).json({ message: 'Campos Tipo, Data e Resultado são obrigatórios.' });
             }
 
-            // valida enums
             if (!Object.values(TipoTeste).includes(tipo)) {
                 return res.status(400).json({ message: 'Tipo de teste inválido.' });
             }

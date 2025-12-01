@@ -4,9 +4,6 @@ export type EnumOption = {
     label: string;
 }
 
-/**
- * Converte um Enum em um array de objetos { value, label } para uso no frontend.
- */
 const enumToArray = (enumObject: any): EnumOption[] => {
     return Object.values(enumObject).map(value => {
         const stringValue = String(value);

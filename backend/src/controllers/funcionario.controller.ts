@@ -1,5 +1,3 @@
-// src/controllers/FuncionarioController.ts
-
 import { Response } from 'express';
 import { FuncionarioService } from '../services/funcionario.service';
 import { NivelPermissao } from '@prisma/client';
@@ -15,7 +13,6 @@ export class FuncionarioController {
         const { usuario, senha } = req.body;
 
         try {
-            // Delega a lógica de hash/comparação para o Service
             const funcionario = await funcionarioService.autenticar(usuario, senha);
 
             if (!funcionario) {
@@ -28,7 +25,6 @@ export class FuncionarioController {
                 { expiresIn: '2h' } 
             );
 
-            // Retorna o token e os dados do funcionário (sem a senha)
             return res.status(200).json({ 
                 token, 
                 nivelPermissao: funcionario.nivelPermissao,
@@ -72,12 +68,10 @@ export class FuncionarioController {
         }
     }
 
-    // --- MÉTODOS FALTANTES DO CRUD ---
 
     // 3. GET /api/funcionarios (Listar Todos - Protegida por ADMIN)
     async listarTodos(req: AuthRequest, res: Response) {
         try {
-            // Delega a busca ao Service
             const funcionarios = await funcionarioService.listarTodosFuncionarios();
             
             return res.status(200).json(funcionarios);
@@ -97,7 +91,6 @@ export class FuncionarioController {
         }
 
         try {
-            // Delega a busca ao Service
             const funcionario = await funcionarioService.buscarFuncionarioPorId(Number(id));
 
             if (!funcionario) {
@@ -121,7 +114,6 @@ export class FuncionarioController {
         }
 
         try {
-            // O Service deve lidar com o hash da senha se ela for alterada
             const funcionarioAtualizado = await funcionarioService.atualizarFuncionario(Number(id), dadosAtualizacao);
 
             return res.status(200).json(funcionarioAtualizado);
@@ -146,10 +138,9 @@ export class FuncionarioController {
         }
 
         try {
-            // Delega a deleção ao Service
             await funcionarioService.deletarFuncionario(Number(id));
             
-            return res.status(204).send(); // Sucesso, sem conteúdo para retornar
+            return res.status(204).send();
         } catch (error: any) {
             if (error.message.includes('Funcionário não encontrado')) {
                 return res.status(404).json({ message: error.message });

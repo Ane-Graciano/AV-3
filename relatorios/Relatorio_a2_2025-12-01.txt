@@ -1,0 +1,20 @@
+--- RELATÓRIO FINAL DE ENTREGA ---
+
+Data de Geração: 30 de novembro de 2025 às 23:33:09
+
+--- DADOS DA AERONAVE ---
+ID Interno: 3
+Código: a2
+Modelo: teste2
+Tipo: COMERCIAL
+Capacidade: 1000
+Alcance: 12
+
+--- PEÇAS UTILIZADAS (1) ---
+- teste (Fornecedor: teste2, Status: PRONTA)
+
+--- ETAPAS REALIZADAS (1) ---
+- teste (Prazo: 22/12/2025, Status: CONCLUIDA, Responsáveis: maria)
+
+--- RESULTADOS DOS TESTES (1) ---
+- ELETRICO: APROVADO (Técnico: ana)

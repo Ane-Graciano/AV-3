@@ -22,7 +22,6 @@ export class RelatorioService {
             throw new Error("Aeronave ainda tem etapas de produção pendentes.");
         }
 
-        // Adicionei a verificação de status das peças aqui para consistência
         const todasPecasProntas = aeronaveDetalhes.pecas.every(p => p.status === 'PRONTA');
         if (!todasPecasProntas) {
             throw new Error("Aeronave ainda tem peças que não estão com o status 'PRONTA'.");
@@ -38,7 +37,6 @@ export class RelatorioService {
         const filePath = path.join(relatoriosDir, nomeArquivo);
         await fs.writeFile(filePath, conteudo, { encoding: 'utf8' });
 
-        // Registro no banco
         const relatorio = await prisma.relatorio.create({
             data: {
                 nomeArquivo,
@@ -77,15 +75,12 @@ export class RelatorioService {
 
         relatorio += `\n--- ETAPAS REALIZADAS (${aeronave.etapas.length}) ---\n`;
         aeronave.etapas.forEach(e => {
-            // CORREÇÃO (BOA PRÁTICA): Garantir que e.funcionarios seja um array
             const funcionarios = (e.funcionarios ?? []).map(f => f.nome).join(', ');
             relatorio += `- ${e.nome} (Prazo: ${e.prazo}, Status: ${e.status}, Responsáveis: ${funcionarios || 'N/A'})\n`;
         });
 
         relatorio += `\n--- RESULTADOS DOS TESTES (${aeronave.testes.length}) ---\n`;
         aeronave.testes.forEach(t => {
-            // CORREÇÃO PRINCIPAL: Usa Optional Chaining (?.) e Nullish Coalescing (??)
-            // para evitar erro se t.funcionario for null/undefined.
             const tecnicoNome = t.funcionario?.nome ?? 'N/A';
             relatorio += `- ${t.tipo}: ${t.resultado} (Técnico: ${tecnicoNome})\n`;
         });
@@ -102,7 +97,7 @@ export class RelatorioService {
 
     async listarTodosRelatorios() {
         return prisma.relatorio.findMany({
-            orderBy: { data: 'desc' } // Ordena por data de geração
+            orderBy: { data: 'desc' } 
         });
     }
 }

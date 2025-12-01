@@ -1,5 +1,3 @@
-// src/services/EtapaService.ts
-
 import { prisma } from './base.service';
 import { Etapa, StatusEtapa } from '@prisma/client';
 
@@ -29,8 +27,6 @@ export class EtapaService {
         if (!aeronave) {
             throw new Error('Aeronave não encontrada para associação.');
         }
-
-        // Mapear os IDs de funcionários para o formato esperado pelo Prisma
         const funcionariosParaConectar = data.funcionariosIds.map(id => ({ id }));
 
         // 2. Criar a nova Etapa e vincular a Aeronave e os Funcionários

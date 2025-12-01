@@ -6,7 +6,7 @@ import {
     EnumOption,
     tipoTesteLista,
     resultLista
-} from '../models/enums'; // Importa todas as listas convertidas
+} from '../models/enums';
 
 export class EnumService {
     
@@ -36,6 +36,5 @@ export class EnumService {
     listarTiposResultTeste(): EnumOption[] {
         return resultLista;
     }
-    // Opcional: Para manter o padrão do seu NivelAcesso
-    // listarNiveisAcesso(): EnumOption[] { /* ... */ } 
+    
 }

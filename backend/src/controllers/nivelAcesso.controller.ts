@@ -8,7 +8,6 @@ export class NivelAcessoController {
     
     async listar(req: AuthRequest, res: Response) {
         try {
-            // Delega a formatação da lista ao Service
             const niveis = nivelAcessoService.listarNiveis();
             
             return res.status(200).json(niveis);

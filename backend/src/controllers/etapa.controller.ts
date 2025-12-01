@@ -1,5 +1,3 @@
-// src/controllers/EtapaController.ts
-
 import { Response } from 'express';
 import { EtapaService } from '../services/etapa.service';
 import { AuthRequest } from '../middlewares/auth.middleware';
@@ -36,7 +34,6 @@ export class EtapaController {
 
     async atualizarEtapa(req: AuthRequest, res: Response) {
         const etapaId = Number(req.params.id);
-        // ✅ DESESTRUTURANDO todos os campos, incluindo funcionariosIds
         const { nome, prazo, statusEtapa, funcionariosIds } = req.body; 
 
         try {
@@ -48,7 +45,7 @@ export class EtapaController {
                 nome,
                 prazo,
                 status: statusEtapa.toUpperCase(),
-                funcionariosIds, // ✅ PASSANDO PARA O SERVICE
+                funcionariosIds, 
             });
 
             return res.status(200).json(etapaAtualizada);

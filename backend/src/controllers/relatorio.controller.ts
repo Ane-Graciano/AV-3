@@ -1,5 +1,3 @@
-// src/controllers/RelatorioController.ts
-
 import { type Response } from 'express';
 import { RelatorioService } from '../services/relatorio.service';
 import { type AuthRequest } from '../middlewares/auth.middleware';
@@ -29,23 +27,19 @@ export class RelatorioController {
 
         } catch (error: any) {
 
-            // Tratamento de erros de lógica de negócio (Status 403)
             if (error.message.includes("peças que não estão com o status 'PRONTA'") ||
                 error.message.includes('etapas de produção pendentes')) {
                 return res.status(403).json({ message: error.message });
             }
 
-            // Captura de erro para violação de constraint (Status 409)
             if (error instanceof Prisma.PrismaClientKnownRequestError && (error.code === 'P2002' || error.code === 'P2014')) {
                 return res.status(409).json({ message: 'Relatório final já foi gerado para esta aeronave.' });
             }
 
-            // Tratamento de recurso não encontrado (Status 404)
             if (error.message.includes('Aeronave não encontrada')) {
                 return res.status(404).json({ message: error.message });
             }
 
-            // Erros internos inesperados (Status 500)
             console.error('Erro ao gerar relatório:', error);
             return res.status(500).json({ message: 'Falha interna ao gerar relatório.' });
         }
@@ -90,20 +84,16 @@ export class RelatorioController {
         const filePath = path.join(relatoriosDir, nomeArquivo);
 
         try {
-            // Verifica se o arquivo existe
             await fs.access(filePath); 
             
-            // Envia o arquivo para download
             res.download(filePath, nomeArquivo, (err) => {
                 if (err) {
                     console.error('Erro ao enviar arquivo:', err);
-                    // Erro no processo de envio do Express (pode ser permissão, etc.)
                     return res.status(500).json({ message: 'Falha ao enviar o arquivo para download.' });
                 }
             });
 
         } catch (error: any) {
-            // Captura erro se o arquivo não existir (ENOENT)
             if (error.code === 'ENOENT') {
                 return res.status(404).json({ message: 'Arquivo de relatório não encontrado no servidor.' });
             }

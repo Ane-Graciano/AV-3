@@ -11,7 +11,6 @@ const pecaController = new PecaController();
 const testeController = new TesteController();
 
 // --- Rotas de PEÇAS (Operador/Engenheiro) ---
-// Note que as peças são relacionadas a uma Aeronave
 router.post('/aeronaves/:id/pecas',
     authenticate,
     authorize([NivelPermissao.ADMINISTRADOR, NivelPermissao.ENGENHEIRO]),
@@ -53,7 +52,7 @@ router.get(
     '/etapas/:id',
     authenticate,
     authorize([NivelPermissao.ADMINISTRADOR, NivelPermissao.ENGENHEIRO, NivelPermissao.OPERADOR]),
-    etapaController.buscarEtapaPorId // Chama o novo método do controller
+    etapaController.buscarEtapaPorId 
 );
 
 router.put('/etapas/:id',
