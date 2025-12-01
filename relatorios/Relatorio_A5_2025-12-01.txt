@@ -1,0 +1,20 @@
+--- RELATÓRIO FINAL DE ENTREGA ---
+
+Data de Geração: 30 de novembro de 2025 às 23:04:46
+
+--- DADOS DA AERONAVE ---
+ID Interno: 2
+Código: A5
+Modelo: teste2
+Tipo: MILITAR
+Capacidade: 1000
+Alcance: 12
+
+--- PEÇAS UTILIZADAS (1) ---
+- teste (Fornecedor: teste2, Status: PRONTA)
+
+--- ETAPAS REALIZADAS (1) ---
+- teste (Prazo: 1 dia, Status: CONCLUIDA, Responsáveis: ana, maria)
+
+--- RESULTADOS DOS TESTES (1) ---
+- HIDRAULICO: REPROVADO (Técnico: maria)
