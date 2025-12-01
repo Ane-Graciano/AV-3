@@ -73,6 +73,20 @@ DATABASE_URL="mysql://root:senha_do_banco@localhost:3306/aerocode_av3"
 JWT_SECRET="av3"
 ```
 
+para Linux/WSL
+
+```bash
+CREATE USER 'av3user'@'localhost' IDENTIFIED BY 'av3senha';
+GRANT ALL PRIVILEGES ON aerocode_av3.* TO 'av3user'@'localhost';
+FLUSH PRIVILEGES;
+```
+
+```env
+DATABASE_URL="mysql://av3user:av3senha@localhost:3306/aerocode_av3"
+JWT_SECRET="av3"
+```
+
+
 ### 4. Rodar o projeto
 
 ## Back
