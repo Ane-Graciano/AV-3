@@ -1,15 +1,15 @@
 # Projeto Aeronaves
 
 ## Descrição
-Este projeto é um sistema de gerenciamento de aeronaves, incluindo cadastro de peças, etapas de manutenção, testes e geração de relatórios em PDF.  
-Frontend em React + Vite, backend em Node.js + Express, com banco de dados gerenciado via Prisma.
+Sistema de gerenciamento de aeronaves, incluindo cadastro de peças, etapas de manutenção, testes e geração de relatórios em PDF.  
+Frontend em React + Vite, backend em Node.js + Express, com banco de dados MySQL gerenciado via Prisma.
 
 ---
 
 ## Tecnologias e Versões Principais
 
 ### Backend
-- Node.js
+- Node.js 20.x (recomendado para compatibilidade com Vite)
 - TypeScript ^5.9.3
 - Express ^5.1.0
 - Prisma ^5.19.1
@@ -23,7 +23,7 @@ Frontend em React + Vite, backend em Node.js + Express, com banco de dados geren
 
 ### Frontend
 - React ^19.1.1
-- Vite ^7.1.7
+- Vite ^7.2.4
 - TypeScript ~5.9.3
 - Tailwind CSS ^4.1.16
 - React Router DOM ^7.9.5
@@ -36,19 +36,21 @@ Frontend em React + Vite, backend em Node.js + Express, com banco de dados geren
 ---
 
 ## Pré-requisitos
-- Node.js instalado
+- Node.js 20.x ou superior
 - npm ou yarn
 - MySQL ou outro banco compatível com Prisma
+- NVM (Node Version Manager) recomendado para WSL/Linux
 - Criar um banco de dados para o projeto
 
 ---
 
 ## Configuração do ambiente
 
-1. **Clonar o repositório**
-```bash
-git clone <URL_DO_REPOSITORIO>
+### 1. Clonar o repositório
 
+```bash
+git clone https://github.com/Ane-Graciano/AV-3
+cd AV-3
 ```
 
 ## Configuração do banco de dados
@@ -58,10 +60,11 @@ Antes de rodar o projeto, abra o MySQL Workbench e execute os seguintes comandos
 ```sql
 CREATE DATABASE aerocode_av3;
 USE aerocode_av3;
-
 ```
 
+
 ### 3. Criar o arquivo `.env`
+
 
 Na raiz do projeto(av-3) (mesmo nível do `package.json`), crie um arquivo chamado `.env` com o seguinte conteúdo:
 
@@ -86,6 +89,11 @@ npx prisma generate
 
 ```bash
 npx prisma migrate dev --name init
+```
+
+Gere o primeiro usuario no banco(workbanch) com o codigo
+```bash
+insert into funcionario(nome ,telefone , endereco, usuario ,senha  ,nivelPermissao) values('ana','11111111','teste','teste.admin','$2b$10$MDL2GVoovZ6Ijvdf2eALu.DeMTegZd7k/BCQ5Mny76x3wQrXqBAGe','ADMINISTRADOR');
 ```
 
 ---
