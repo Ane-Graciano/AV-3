@@ -135,3 +135,14 @@ cd frontend
 ```bash
 npm install
 ```
+
+###logar 
+usuairio
+```bash
+teste.admin
+```
+
+senha
+```bah
+123456
+```
