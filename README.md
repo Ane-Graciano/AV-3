@@ -79,6 +79,17 @@ Antes de entrar nas pastas `back` ou `front`, rode:
 ```bash
 npm install
 ```
+cole esse para gerar o banco
+```bash
+npx prisma generate
+```
+
+```bash
+npx prisma migrate dev --name init
+```
+
+---
+
 Entre na pasta do backend e instale as dependências
 ```bash
 cd backend
@@ -86,11 +97,6 @@ cd backend
 depois
 ```bash
 npm install
-```
-
-cole esse para gerar o banco
-```bash
-npx prisma generate
 ```
 
 ---
